@@ -1,4 +1,4 @@
-package com.beyond.todolist.config;
+package com.beyond.todolist.common.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
