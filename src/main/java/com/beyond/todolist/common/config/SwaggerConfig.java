@@ -18,8 +18,8 @@ public class SwaggerConfig {
 
     private Info apiInfo(){
         return new Info()
-                .title("Pocket Wedding API")
+                .title("TodoApp API")
                 .version("1.0")
-                .description("Pocket Wedding API Server");
+                .description("TodoApp API Server");
     }
 }
