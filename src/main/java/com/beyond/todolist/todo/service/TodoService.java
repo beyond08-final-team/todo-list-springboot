@@ -8,6 +8,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,5 +26,9 @@ public class TodoService {
                 .build();
 
         return Optional.of(todoRepository.save(todo));
+    }
+
+    public List<Todo> getAllTodos() {
+        return todoRepository.findAll();
     }
 }
