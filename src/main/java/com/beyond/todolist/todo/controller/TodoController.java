@@ -2,6 +2,7 @@ package com.beyond.todolist.todo.controller;
 
 import com.beyond.todolist.todo.domain.Todo;
 import com.beyond.todolist.todo.dto.TodoRegisterRequestDTO;
+import com.beyond.todolist.todo.dto.TodoUpdateRequestDTO;
 import com.beyond.todolist.todo.service.TodoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -24,7 +25,7 @@ public class TodoController {
 
     @Operation(summary = "할 일 리스트를 생성하는 API")
     @PostMapping("/register")
-    public ResponseEntity<Void> register(@RequestBody @Valid TodoRegisterRequestDTO todoRegisterRequestDTO) {
+    public ResponseEntity<Void> registerTodo(@RequestBody @Valid TodoRegisterRequestDTO todoRegisterRequestDTO) {
 
         todoService.registerTodo(todoRegisterRequestDTO);
 
@@ -36,5 +37,14 @@ public class TodoController {
 
         List<Todo> todos = todoService.getAllTodos();
         return ResponseEntity.ok(todos);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Void> updateTodo(@PathVariable("id") Long id,
+                                           @RequestBody @Valid TodoUpdateRequestDTO todoUpdateRequestDTO) {
+
+        todoService.updateTodo(id, todoUpdateRequestDTO);
+
+        return ResponseEntity.noContent().build();
     }
 }

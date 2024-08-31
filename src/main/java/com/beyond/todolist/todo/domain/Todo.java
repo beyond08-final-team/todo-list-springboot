@@ -1,9 +1,12 @@
 package com.beyond.todolist.todo.domain;
 
 import com.beyond.todolist.common.domain.BaseTimeEntity;
+import com.beyond.todolist.todo.dto.TodoUpdateRequestDTO;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.Optional;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,4 +25,9 @@ public class Todo extends BaseTimeEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TodoStatus status;
+
+    public void update(TodoUpdateRequestDTO todoUpdateRequestDTO) {
+        Optional.ofNullable(todoUpdateRequestDTO.getContent()).ifPresent(content -> this.content = content);
+        Optional.ofNullable(todoUpdateRequestDTO.getStatus()).ifPresent(status -> this.status = status);
+    }
 }
