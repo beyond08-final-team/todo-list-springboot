@@ -46,4 +46,13 @@ public class TodoService {
 
         return Optional.empty();
     }
+
+    public void deleteTodo(Long id) {
+
+        Todo todo = todoRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("존재하지 않습니다.: " + id)
+        );
+
+        todoRepository.delete(todo);
+    }
 }

@@ -32,6 +32,7 @@ public class TodoController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @Operation(summary = "할 일 리스트를 반환하는 API")
     @GetMapping("/list")
     public ResponseEntity<List<Todo>> getAllTodos() {
 
@@ -39,6 +40,7 @@ public class TodoController {
         return ResponseEntity.ok(todos);
     }
 
+    @Operation(summary = "할 일 리스트를 수정하는 API")
     @PutMapping("/update/{id}")
     public ResponseEntity<Void> updateTodo(@PathVariable("id") Long id,
                                            @RequestBody @Valid TodoUpdateRequestDTO todoUpdateRequestDTO) {
@@ -46,5 +48,14 @@ public class TodoController {
         todoService.updateTodo(id, todoUpdateRequestDTO);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "할 일 리스트를 삭제하는 API")
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteTodo(@PathVariable("id") Long id) {
+
+        todoService.deleteTodo(id);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
