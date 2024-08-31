@@ -1,15 +1,15 @@
 package com.beyond.todolist.todo.domain;
 
 import com.beyond.todolist.common.domain.BaseTimeEntity;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@NoArgsConstructor(access=lombok.AccessLevel.PROTECTED)
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Getter
-@Setter
+@Builder
 public class Todo extends BaseTimeEntity {
 
     @Id
