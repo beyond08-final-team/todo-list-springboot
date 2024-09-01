@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,13 +17,13 @@ public class TodoService {
 
     private final TodoRepository todoRepository;
 
-    public Optional<Todo> createTodo(TodoReq todoReq){
+    public void createTodo(TodoReq todoReq){
         Todo todo = Todo.builder()
                 .content(todoReq.getContent())
                 .status(todoReq.getStatus())
                 .build();
 
-        return Optional.of(todoRepository.save(todo));
+        todoRepository.save(todo);
     }
 
 
