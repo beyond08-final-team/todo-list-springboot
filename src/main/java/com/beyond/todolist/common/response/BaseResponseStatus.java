@@ -29,7 +29,7 @@ public enum BaseResponseStatus {
     private final int code;
     private final String message;
 
-    private BaseResponseStatus(boolean isSuccess, int code, String message) {
+    BaseResponseStatus(boolean isSuccess, int code, String message) {
         this.isSuccess = isSuccess; // 성공 여부
         this.code = code;  // 코드
         this.message = message; // 내용
