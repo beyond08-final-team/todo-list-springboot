@@ -2,12 +2,12 @@ package com.beyond.todolist.todo.controller;
 
 import com.beyond.todolist.common.response.BaseResponse;
 import com.beyond.todolist.todo.dto.CreateTodoReq;
+import com.beyond.todolist.todo.entity.Todo;
 import com.beyond.todolist.todo.service.TodoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/todo")
@@ -22,5 +22,12 @@ public class TodoController {
         todoService.createTodo(createTodoReq);
 
         return new BaseResponse<>("");
+    }
+
+    @GetMapping("/list")
+    public BaseResponse<List<Todo>> GetAllTodos() {
+        List<Todo> todos = todoService.getAllTodos();
+
+        return new BaseResponse<>(todos);
     }
 }
