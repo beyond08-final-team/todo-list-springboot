@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Getter
-public class CreateTodoReq {
+public class TodoReq {
 
     @NotBlank(message = "공백만 입력될 수 없습니다.")
     private String content;

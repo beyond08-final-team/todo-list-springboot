@@ -1,7 +1,7 @@
 package com.beyond.todolist.todo.controller;
 
 import com.beyond.todolist.common.response.BaseResponse;
-import com.beyond.todolist.todo.dto.CreateTodoReq;
+import com.beyond.todolist.todo.dto.TodoReq;
 import com.beyond.todolist.todo.entity.Todo;
 import com.beyond.todolist.todo.service.TodoService;
 import lombok.RequiredArgsConstructor;
@@ -17,11 +17,11 @@ public class TodoController {
     private final TodoService todoService;
 
     @PostMapping("/create")
-    public BaseResponse<String> createTodo(@RequestBody CreateTodoReq createTodoReq) {
+    public BaseResponse<String> createTodo(@RequestBody TodoReq todoReq) {
 
-        todoService.createTodo(createTodoReq);
+        todoService.createTodo(todoReq);
 
-        return new BaseResponse<>("");
+        return new BaseResponse<>("Todo 등록 완료");
     }
 
     @GetMapping("/list")
@@ -29,5 +29,13 @@ public class TodoController {
         List<Todo> todos = todoService.getAllTodos();
 
         return new BaseResponse<>(todos);
+    }
+
+    @PutMapping("/update/{id}")
+    public BaseResponse<String> updateTodo(@PathVariable("id") Long id, @RequestBody TodoReq todoReq) {
+
+        todoService.updateTodo(id, todoReq);
+
+        return new BaseResponse<>("Todo 수정 완료");
     }
 }

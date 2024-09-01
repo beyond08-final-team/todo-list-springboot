@@ -2,15 +2,13 @@ package com.beyond.todolist.todo.entity;
 
 import com.beyond.todolist.common.entity.BaseTimeEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Getter
+@Setter
 @Builder
 @Table(name = "todos") // DB table 이름이 todos
 public class Todo extends BaseTimeEntity {
@@ -24,7 +22,5 @@ public class Todo extends BaseTimeEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TodoStatus status;
-
-
 
 }
