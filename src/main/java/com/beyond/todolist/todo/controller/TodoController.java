@@ -38,4 +38,12 @@ public class TodoController {
 
         return new BaseResponse<>("Todo 수정 완료");
     }
+
+    @DeleteMapping("/delete/{id}")
+    public BaseResponse<String> deleteTodo(@PathVariable("id") Long id) {
+
+        todoService.deleteTodo(id);
+
+        return new BaseResponse<>("Todo 삭제 완료");
+    }
 }
