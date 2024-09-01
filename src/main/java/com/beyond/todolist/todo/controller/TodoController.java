@@ -2,10 +2,8 @@ package com.beyond.todolist.todo.controller;
 
 import com.beyond.todolist.common.response.BaseResponse;
 import com.beyond.todolist.todo.dto.CreateTodoReq;
-import com.beyond.todolist.todo.entity.Todo;
 import com.beyond.todolist.todo.service.TodoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
