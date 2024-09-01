@@ -4,6 +4,7 @@ import com.beyond.todolist.common.response.BaseResponse;
 import com.beyond.todolist.todo.dto.TodoReq;
 import com.beyond.todolist.todo.entity.Todo;
 import com.beyond.todolist.todo.service.TodoService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class TodoController {
     private final TodoService todoService;
 
     @PostMapping("/create")
-    public BaseResponse<String> createTodo(@RequestBody TodoReq todoReq) {
+    public BaseResponse<String> createTodo(@RequestBody @Valid TodoReq todoReq) {
 
         todoService.createTodo(todoReq);
 
@@ -32,7 +33,7 @@ public class TodoController {
     }
 
     @PutMapping("/update/{id}")
-    public BaseResponse<String> updateTodo(@PathVariable("id") Long id, @RequestBody TodoReq todoReq) {
+    public BaseResponse<String> updateTodo(@PathVariable("id") Long id, @RequestBody @Valid TodoReq todoReq) {
 
         todoService.updateTodo(id, todoReq);
 
