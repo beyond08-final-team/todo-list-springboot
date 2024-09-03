@@ -17,7 +17,7 @@ public class TodoController {
 
     private final TodoService todoService;
 
-    @PostMapping("/create")
+    @PostMapping("/")
     public BaseResponse<String> createTodo(@RequestBody @Valid TodoReq todoReq) {
 
         todoService.createTodo(todoReq);
@@ -32,7 +32,7 @@ public class TodoController {
         return new BaseResponse<>(todos);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public BaseResponse<String> updateTodo(@PathVariable("id") Long id, @RequestBody @Valid TodoReq todoReq) {
 
         todoService.updateTodo(id, todoReq);
@@ -40,7 +40,7 @@ public class TodoController {
         return new BaseResponse<>("Todo 수정 완료");
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public BaseResponse<String> deleteTodo(@PathVariable("id") Long id) {
 
         todoService.deleteTodo(id);
