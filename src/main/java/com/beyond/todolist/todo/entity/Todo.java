@@ -1,17 +1,16 @@
 package com.beyond.todolist.todo.entity;
 
 import com.beyond.todolist.common.entity.BaseTimeEntity;
+import com.beyond.todolist.todo.dto.TodoReq;
 import jakarta.persistence.*;
 import lombok.*;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Getter
-@Setter
-@Builder
 @Table(name = "todos") // DB table 이름이 todos
 public class Todo extends BaseTimeEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,4 +22,15 @@ public class Todo extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private TodoStatus status;
 
+    // update method
+    @Builder
+    public Todo(String content, TodoStatus status){
+        this.content = content;
+        this.status = status;
+    }
+
+    public void todoUpdate(TodoReq todoReq) {
+        this.content = todoReq.getContent();
+        this.status = todoReq.getStatus();
+    }
 }

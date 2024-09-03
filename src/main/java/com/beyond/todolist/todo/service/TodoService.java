@@ -35,8 +35,7 @@ public class TodoService {
 
         Todo todo = todoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("존재하지 않습니다.: " + id));
 
-        todo.setContent(todoReq.getContent());
-        todo.setStatus(todoReq.getStatus());
+        todo.todoUpdate(todoReq);
 
         todoRepository.save(todo);
     }
