@@ -28,7 +28,12 @@ public class TodoService implements TodoOperationUseCase, TodoReadUseCase{
     @Override
     public List<FindTodoResult> getTodos(TodoFindQuery query) {
         log.info("[TodoService - getTodos] query = {}", query);
-        return List.of();
+
+        List<TodoEntity> results = todoCrudRepository.findAll();
+
+        return results.stream()
+                .map(FindTodoResult::findByTodoEntity)
+                .toList();
     }
 
     @Override
