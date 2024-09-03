@@ -32,7 +32,7 @@ public class TodoController {
         return new BaseResponse<>(todos);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public BaseResponse<String> updateTodo(@PathVariable("id") Long id, @RequestBody @Valid TodoReq todoReq) {
 
         todoService.updateTodo(id, todoReq);
