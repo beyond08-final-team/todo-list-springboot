@@ -7,17 +7,20 @@ import com.beyond.todolist.infrastructure.mariadb.repository.TodoCrudRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class TodoService implements TodoOperationUseCase, TodoReadUseCase{
 
     private final TodoCrudRepository todoCrudRepository;
 
     @Override
+    @Transactional
     public FindTodoResult saveTodo(TodoCreateCommand command) {
         log.info("[TodoService - saveTodo] command = {}", command);
         return FindTodoResult.findByTodoEntity(
@@ -37,6 +40,7 @@ public class TodoService implements TodoOperationUseCase, TodoReadUseCase{
     }
 
     @Override
+    @Transactional
     public FindTodoResult updateTodoContent(TodoContentUpdateCommand command) {
         log.info("[TodoService - updateTodoContent] command = {}", command);
         TodoEntity todo = retrieveTodoEntityById(command.getId());
@@ -59,6 +63,7 @@ public class TodoService implements TodoOperationUseCase, TodoReadUseCase{
     }
 
     @Override
+    @Transactional
     public FindTodoResult updateTodoStatus(TodoStatusUpdateCommand command) {
 
         TodoEntity todo = retrieveTodoEntityById(command.getId());
@@ -75,6 +80,7 @@ public class TodoService implements TodoOperationUseCase, TodoReadUseCase{
     }
 
     @Override
+    @Transactional
     public void deleteTodo(Long id) {
         TodoEntity todo = retrieveTodoEntityById(id);
         todoCrudRepository.delete(todo);
