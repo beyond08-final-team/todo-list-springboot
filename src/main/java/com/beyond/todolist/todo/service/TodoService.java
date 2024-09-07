@@ -3,7 +3,8 @@ package com.beyond.todolist.todo.service;
 import com.beyond.todolist.todo.domain.Todo;
 import com.beyond.todolist.todo.domain.TodoRepository;
 import com.beyond.todolist.todo.dto.TodoRegisterRequestDTO;
-import com.beyond.todolist.todo.dto.TodoUpdateRequestDTO;
+import com.beyond.todolist.todo.dto.TodoUpdateContentRequestDTO;
+import com.beyond.todolist.todo.dto.TodoUpdateStatusRequestDTO;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
@@ -34,15 +35,24 @@ public class TodoService {
         return todoRepository.findAll();
     }
 
-    public Optional<Void> updateTodo(Long id, TodoUpdateRequestDTO todoUpdateRequestDTO) {
+    public Optional<Void> updateContent(Long id, TodoUpdateContentRequestDTO todoUpdateContentRequestDTO) {
 
         Todo todo = todoRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("존재하지 않습니다.: " + id)
         );
 
-        todo.update(todoUpdateRequestDTO);
+        todo.updateContent(todoUpdateContentRequestDTO);
 
-//        todoRepository.save(todo);
+        return Optional.empty();
+    }
+
+    public Optional<Void> updateStatus(Long id, TodoUpdateStatusRequestDTO todoUpdateStatusRequestDTO) {
+
+        Todo todo = todoRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("존재하지 않습니다.: " + id)
+        );
+
+        todo.updateStatus(todoUpdateStatusRequestDTO);
 
         return Optional.empty();
     }

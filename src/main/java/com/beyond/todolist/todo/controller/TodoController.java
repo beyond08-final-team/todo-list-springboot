@@ -2,7 +2,8 @@ package com.beyond.todolist.todo.controller;
 
 import com.beyond.todolist.todo.domain.Todo;
 import com.beyond.todolist.todo.dto.TodoRegisterRequestDTO;
-import com.beyond.todolist.todo.dto.TodoUpdateRequestDTO;
+import com.beyond.todolist.todo.dto.TodoUpdateContentRequestDTO;
+import com.beyond.todolist.todo.dto.TodoUpdateStatusRequestDTO;
 import com.beyond.todolist.todo.service.TodoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -40,12 +41,22 @@ public class TodoController {
         return ResponseEntity.ok(todos);
     }
 
-    @Operation(summary = "할 일 리스트를 수정하는 API")
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> updateTodo(@PathVariable("id") Long id,
-                                           @RequestBody @Valid TodoUpdateRequestDTO todoUpdateRequestDTO) {
+    @Operation(summary = "할 일 리스트의 내용을 수정하는 API")
+    @PatchMapping("/{id}/content")
+    public ResponseEntity<Void> updateContent(@PathVariable("id") Long id,
+                                           @RequestBody @Valid TodoUpdateContentRequestDTO todoUpdateContentRequestDTO) {
 
-        todoService.updateTodo(id, todoUpdateRequestDTO);
+        todoService.updateContent(id, todoUpdateContentRequestDTO);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "할 일 리스트의 상태를 수정하는 API")
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<Void> updateStatus(@PathVariable("id") Long id,
+                                              @RequestBody @Valid TodoUpdateStatusRequestDTO todoUpdateStatusRequestDTO) {
+
+        todoService.updateStatus(id, todoUpdateStatusRequestDTO);
 
         return ResponseEntity.noContent().build();
     }
