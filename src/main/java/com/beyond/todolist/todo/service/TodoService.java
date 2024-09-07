@@ -42,7 +42,7 @@ public class TodoService {
 
         todo.update(todoUpdateRequestDTO);
 
-        todoRepository.save(todo);
+//        todoRepository.save(todo);
 
         return Optional.empty();
     }
