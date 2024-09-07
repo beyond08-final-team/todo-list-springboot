@@ -2,7 +2,6 @@ package com.beyond.todolist.todo.domain;
 
 import com.beyond.todolist.common.domain.BaseTimeEntity;
 import com.beyond.todolist.todo.dto.TodoUpdateRequestDTO;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.*;
 
