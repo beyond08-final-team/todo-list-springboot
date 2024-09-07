@@ -17,14 +17,14 @@ import java.util.List;
 
 @Tag(name = "TodoApp", description = "투두앱 만들기")
 @RestController
-@RequestMapping("/api/v1/todo")
+@RequestMapping("/api/v1/todos")
 @RequiredArgsConstructor(access = AccessLevel.PUBLIC)
 public class TodoController {
 
     private final TodoService todoService;
 
     @Operation(summary = "할 일 리스트를 생성하는 API")
-    @PostMapping("/register")
+    @PostMapping("")
     public ResponseEntity<Void> registerTodo(@RequestBody @Valid TodoRegisterRequestDTO todoRegisterRequestDTO) {
 
         todoService.registerTodo(todoRegisterRequestDTO);
@@ -33,7 +33,7 @@ public class TodoController {
     }
 
     @Operation(summary = "할 일 리스트를 반환하는 API")
-    @GetMapping("/list")
+    @GetMapping("")
     public ResponseEntity<List<Todo>> getAllTodos() {
 
         List<Todo> todos = todoService.getAllTodos();
@@ -41,7 +41,7 @@ public class TodoController {
     }
 
     @Operation(summary = "할 일 리스트를 수정하는 API")
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Void> updateTodo(@PathVariable("id") Long id,
                                            @RequestBody @Valid TodoUpdateRequestDTO todoUpdateRequestDTO) {
 
@@ -51,7 +51,7 @@ public class TodoController {
     }
 
     @Operation(summary = "할 일 리스트를 삭제하는 API")
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTodo(@PathVariable("id") Long id) {
 
         todoService.deleteTodo(id);
