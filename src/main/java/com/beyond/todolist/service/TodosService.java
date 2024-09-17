@@ -1,6 +1,6 @@
 package com.beyond.todolist.service;
 
-import com.beyond.todolist.dto.TodoStatusRequestDTO;
+import com.beyond.todolist.domain.Todos;
 import com.beyond.todolist.dto.TodosListResponseDTO;
 import com.beyond.todolist.dto.TodosSaveRequestDTO;
 import com.beyond.todolist.dto.TodosUpdateRequestDTO;
@@ -11,12 +11,13 @@ public interface TodosService {
 
     List<TodosListResponseDTO> getTodosList();
 
-    void saveTodoList(TodosSaveRequestDTO todosSaveRequestDTO);
+    TodosSaveRequestDTO saveTodoList(TodosSaveRequestDTO todosSaveRequestDTO);
 
-    void updateTodoList(Long id, TodosUpdateRequestDTO todosUpdateRequestDTO);
+    Todos updateTodoList(Long id, TodosUpdateRequestDTO todosUpdateRequestDTO);
 
-    void updateStatus(Long id, TodoStatusRequestDTO todoStatusRequestDTO);
+    Todos updateStatusDone(Long id);
+
+    Todos updateStatusInProgress(Long id);
 
     void deleteTodoList(Long id);
-
 }

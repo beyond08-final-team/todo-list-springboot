@@ -1,5 +1,6 @@
 package com.beyond.todolist.controller;
 
+import com.beyond.todolist.domain.Todos;
 import com.beyond.todolist.domain.TodosRepository;
 import com.beyond.todolist.dto.TodoStatusRequestDTO;
 import com.beyond.todolist.dto.TodosListResponseDTO;
@@ -17,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173")
 public class TodosController {
 
     private final TodosService todosService;
@@ -31,20 +33,32 @@ public class TodosController {
     @PostMapping("")
     @Operation(summary = "TodoList 등록 API")
     public ResponseEntity<TodosSaveRequestDTO> save(@RequestBody TodosSaveRequestDTO todosSaveRequestDTO) {
-        todosService.saveTodoList(todosSaveRequestDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        TodosSaveRequestDTO savedTask = todosService.saveTodoList(todosSaveRequestDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedTask);
     }
 
-    @PutMapping("/content/{id}")
+    @PatchMapping("/content/{id}")
     @Operation(summary = "TodoList 내용 수정 API")
-    public void updateContent(@PathVariable Long id, @RequestBody TodosUpdateRequestDTO todosUpdateRequestDTO) {
-        todosService.updateTodoList(id, todosUpdateRequestDTO);
+    public ResponseEntity<Todos> updateContent(
+            @PathVariable Long id,
+            @RequestBody TodosUpdateRequestDTO todosUpdateRequestDTO
+    ) {
+        Todos updatedTodo = todosService.updateTodoList(id, todosUpdateRequestDTO);
+        return ResponseEntity.ok(updatedTodo); // Return the updated Todo object
     }
 
-    @PutMapping("/status/{id}")
-    @Operation(summary = "TodoList 상태 수정 API")
-    public void updateStatus(@PathVariable Long id, @RequestBody TodoStatusRequestDTO todoStatusRequestDTO) {
-        todosService.updateStatus(id, todoStatusRequestDTO);
+    @PatchMapping("/statusDone/{id}")
+    @Operation(summary = "TodoList 상태 DONE 수정 API")
+    public ResponseEntity<Todos> updateStatusDone(@PathVariable Long id) {
+        Todos updatedTodo = todosService.updateStatusDone(id);
+        return ResponseEntity.ok(updatedTodo); // 수정된 작업 데이터 반환
+    }
+
+    @PatchMapping("/statusInProgress/{id}")
+    @Operation(summary = "TodoList 상태 InProgress 수정 API")
+    public ResponseEntity<Todos> updateStatusInProgress(@PathVariable Long id) {
+        Todos todos = todosService.updateStatusInProgress(id);
+        return ResponseEntity.ok(todos);
     }
 
     @DeleteMapping("/{id}")

@@ -43,4 +43,11 @@ public class Todos extends BaseTimeEntity {
         this.status = status;
     }
 
+    public void updateStatusDone() {
+        this.status = Status.Done;
+    }
+
+    public void updateStatusInProgress() {
+        this.status = Status.InProgress;
+    }
 }

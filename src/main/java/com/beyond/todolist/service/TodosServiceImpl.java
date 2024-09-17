@@ -38,36 +38,50 @@ public class TodosServiceImpl implements TodosService {
 
     @Override
     @Transactional
-    public void saveTodoList(TodosSaveRequestDTO todosSaveRequestDTO) {
+    public TodosSaveRequestDTO saveTodoList(TodosSaveRequestDTO todosSaveRequestDTO) {
 
         Todos todos = Todos.builder()
                 .content(todosSaveRequestDTO.getContent())
-                .status(todosSaveRequestDTO.getStatus())
                 .build();
 
         todos = todosRepository.save(todos);
 
         TodosResponseDTO.of(todos);
+        return todosSaveRequestDTO;
     }
 
     @Override
     @Transactional
-    public void updateTodoList(Long id, TodosUpdateRequestDTO todosUpdateRequestDTO) {
+    public Todos updateTodoList(Long id, TodosUpdateRequestDTO todosUpdateRequestDTO) {
 
         Todos todos = todosRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("해당 ID를 찾을 수 없습니다."));
 
         todos.updateContent(todosUpdateRequestDTO.getContent());
+        return todos;
     }
 
     @Override
     @Transactional
-    public void updateStatus(Long id, TodoStatusRequestDTO todoStatusRequestDTO) {
-
+    public Todos updateStatusDone(Long id) {
         Todos todos = todosRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("해당 ID를 찾을 수 없습니다."));
 
-        todos.updateStatus(todoStatusRequestDTO.getStatus());
+        todos.updateStatusDone();
+        todosRepository.save(todos);
+        return todos; // 수정된 Todos 객체 반환
+    }
+
+
+    @Override
+    @Transactional
+    public Todos updateStatusInProgress(Long id) {
+        Todos todos = todosRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("해당 ID를 찾을 수 없습니다."));
+
+        todos.updateStatusInProgress();
+        todosRepository.save(todos);
+        return todos;
     }
 
     @Override
