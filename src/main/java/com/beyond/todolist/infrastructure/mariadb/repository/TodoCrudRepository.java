@@ -8,4 +8,5 @@ import java.util.List;
 public interface TodoCrudRepository extends CrudRepository<TodoEntity, Long> {
 
     List<TodoEntity> findAll();
+
 }

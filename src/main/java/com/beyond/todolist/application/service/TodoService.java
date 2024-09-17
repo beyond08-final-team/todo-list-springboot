@@ -40,6 +40,13 @@ public class TodoService implements TodoOperationUseCase, TodoReadUseCase{
     }
 
     @Override
+    public FindTodoResult getTodoById(TodoFindQuery query) {
+        return FindTodoResult.findByTodoEntity(
+                retrieveTodoEntityById(query.getId())
+        );
+    }
+
+    @Override
     @Transactional
     public FindTodoResult updateTodoContent(TodoContentUpdateCommand command) {
         log.info("[TodoService - updateTodoContent] command = {}", command);

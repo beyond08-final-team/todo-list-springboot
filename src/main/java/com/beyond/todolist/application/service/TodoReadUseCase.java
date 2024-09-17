@@ -14,6 +14,8 @@ public interface TodoReadUseCase {
 
     List<FindTodoResult> getTodos(TodoFindQuery query);
 
+    FindTodoResult getTodoById(TodoFindQuery query);
+
     @Getter
     @Builder
     @ToString
